@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
     public function index()
     {
-        $books = Book::orderBy('published','desc')->paginate(4);
+        $books = Book::where('user_id', Auth::user()->id)->orderBy('published','desc')->paginate(4);
         return view('books', ['books' => $books]);
     }
 
@@ -35,6 +36,7 @@ class BooksController extends Controller
         $book->item_name     = $request->item_name;
         $book->item_purchase = $request->item_purchase;
         $book->item_amount   = $request->item_amount;
+        $book->user_id       = Auth::user()->id;
         $book->published     = $request->published;
         $book->save();
 
@@ -43,9 +45,10 @@ class BooksController extends Controller
         return redirect('/');
     }
 
-    public function edit(Book $book)
+    public function edit($book_id)
     {
-        return view('edit', ['book' => $book]);
+        $book = Book::where('user_id', Auth::user()->id)->find($book_id);
+        return view('books.edit',['book' => $book]);
     }
 
     public function update(Request $request, Book $book)
@@ -64,6 +67,7 @@ class BooksController extends Controller
         $book->item_name     = $request->item_name;
         $book->item_purchase = $request->item_purchase;
         $book->item_amount   = $request->item_amount;
+        $book->user_id       = Auth::user()->id;
         $book->published     = $request->published;
         $book->save();
 

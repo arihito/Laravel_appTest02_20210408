@@ -5,6 +5,7 @@
 @section('content')
 
 <form action="{{ url('books')}}" method="post" class="row">
+<input type='hidden' name='user_id' value="{{ Auth::user()->id }}">
 
 <!-- トークンを自動発行し受け取り側で認証を行う -->
 {{ csrf_field() }}
