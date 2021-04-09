@@ -10,8 +10,8 @@ class BooksController extends Controller
 {
     public function index()
     {
-        $dbdata = Book::all();
-        return view('books', ['books' => $dbdata]);
+        $books = Book::orderBy('published','desc')->paginate(4);
+        return view('books', ['books' => $books]);
     }
 
     public function create()

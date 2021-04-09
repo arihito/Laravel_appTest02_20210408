@@ -17,7 +17,7 @@ class BooksTableSeeder extends Seeder
     {
 
         // 出力件数を指定
-        $NUM_FAKER = 10;
+        $NUM_FAKER = 30;
         // Factoryインスタンスを生成
         $faker = Factory::create('ja_JP');
         // 本のタイトルのみ英語名なので日本語で定義

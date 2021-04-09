@@ -21,3 +21,10 @@ Route::get('/books/{book}/edit', 'App\Http\Controllers\BooksController@edit');
 Route::put('/books/{book}', 'App\Http\Controllers\BooksController@update');
 Route::get('/books/{book}', 'App\Http\Controllers\BooksController@edit');
 Route::get('/books/{book}/show', 'App\Http\Controllers\BooksController@show');
+
+
+Route::resource('items','ItemsController');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

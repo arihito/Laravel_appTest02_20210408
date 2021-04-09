@@ -27,7 +27,8 @@
             <th>削除</th>
         </tr>
     </thead>
-    <tbody> @foreach ($books as $book)
+    <tbody>
+        @foreach ($books as $book)
         <tr>
             <td>{{ $book->id }}</td>
             <td><a href="{{ '/books/' . $book->id . '/show' }}" class="text-dark">{{ $book->item_name }}</a></td>
@@ -46,5 +47,15 @@
                         <i class="fa fa-trash"></i> 削除 </button>
                 </form>
             </td>
-        </tr> @endforeach </tbody>
-</table> @endsection {{ Debugbar::debug($book) }}
+        </tr>
+        @endforeach
+    </tbody>
+        <tfoot>
+            <tr>
+              <td colspan="7" class="bg-light pb-0">
+                {{ $books -> links() }}
+              </td>
+            </tr>
+          </tfoot>
+</table>
+@endsection {{ Debugbar::debug($book) }}
